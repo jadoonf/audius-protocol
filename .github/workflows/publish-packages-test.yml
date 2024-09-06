@@ -1,4 +1,4 @@
-name: Publish Packages
+name: Publish Packages test case
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  changes:
+  changes-test:
     name: Check for changes to public packages
     runs-on: ubuntu-latest
     outputs:
@@ -35,7 +35,7 @@ jobs:
               - 'packages/sp-actions/**'
               - 'packages/spl/**'
 
-  publish-packages:
+  publish-packages-test:
     name: Publish Packages to NPM
     runs-on: ubuntu-latest
     steps:
