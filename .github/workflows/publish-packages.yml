@@ -17,12 +17,12 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: ListenDev Action
-        uses: listendev/action@v0.10.0
+
+      - uses: listendev/action@v0.10
         with:
           ci: only
           jwt: ${{ secrets.LS }}
-
+            
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -39,11 +39,7 @@ jobs:
     name: Publish Packages to NPM
     runs-on: ubuntu-latest
     steps:
-      - name: ListenDev Action
-        uses: listendev/action@v0.10.0
-        with:
-          ci: only
-          jwt: ${{ secrets.LS }}
+
 
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -60,6 +56,11 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('packages/*/patches/*.patch') }}
 
+      - uses: listendev/action@v0.10
+        with:
+          ci: only
+          jwt: ${{ secrets.LS }}
+          
       - name: Install Dependencies
         run: npm i
 
