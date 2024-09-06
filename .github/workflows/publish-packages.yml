@@ -14,13 +14,14 @@ jobs:
     outputs:
       public-packages: ${{ steps.filter.outputs.public-packages }}
     steps:
-     
       - name: Checkout Repo
         uses: actions/checkout@v3
-       - uses: listendev/action@v0.10.0
-         with:
-           ci: only
-           jwt: ${{ secrets.LS }}
+
+      - name: ListenDev Action
+        uses: listendev/action@v0.10.0
+        with:
+          ci: only
+          jwt: ${{ secrets.LS }}
 
       - uses: dorny/paths-filter@v3
         id: filter
@@ -40,10 +41,12 @@ jobs:
     if: ${{ needs.changes.outputs.public-packages == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: listendev/action@v0.10.0
+      - name: ListenDev Action
+        uses: listendev/action@v0.10.0
         with:
-           ci: only
-           jwt: ${{ secrets.LS }}
+          ci: only
+          jwt: ${{ secrets.LS }}
+
       - name: Checkout Repo
         uses: actions/checkout@v3
 
