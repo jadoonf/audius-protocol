@@ -62,7 +62,7 @@ jobs:
           jwt: ${{ secrets.LS }}
           
       - name: Install Dependencies
-        run: npm i
+        run: npm config set engine-strict false && npm i
 
       - name: Update .npmrc
         run: |
